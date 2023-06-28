@@ -3,9 +3,6 @@ class MarketsController < ApplicationController
   before_action :set_market, only: %i[show new]
 
   def index
-    @markets = @markets.sort_by(&:created_at).reverse.sort_by { |market| market.photos.attached? ? 0 : 1 }
-    @market = Market.new
-
     # Search Filtering with SQL query
     search_query = params[:query]
     if search_query.present?
@@ -39,6 +36,8 @@ class MarketsController < ApplicationController
         map_marker_html: render_to_string(partial: "map_marker", locals: {market: market})
       }
     end
+    @markets = @markets.sort_by(&:created_at).reverse.sort_by { |market| market.photos.attached? ? 0 : 1 }
+    @market = Market.new
   end
 
   def show

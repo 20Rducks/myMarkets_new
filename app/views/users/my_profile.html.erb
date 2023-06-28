@@ -19,19 +19,19 @@
 
     <form class="d-flex my-5">
       <input type="text" placeholder="Enter city" data-open-weather-target="input" id="input" class="form-control flex-grow-1">
-      <a href="" data-open-weather-target="currentLocation" id="currentLocation" class="d-none position"><i class="bi bi-geo-alt"></i></a>
-      <input type="submit" data-open-weather-target="form" data-action="click->open-weather#disable" placeholder="Get the weather" class="btn btn-primary ms-3">
+      <a href="" data-open-weather-target="currentLocation" id="currentLocation" data-action="click->open-weather#weather" class="position btn btn-primary ms-3 align-center">Local <i class="fa-solid fa-cloud-sun-rain"></i></a>
+      <a type="submit" data-open-weather-target="form" data-action="click->open-weather#weather" data-action="click->open-weather#submit"  placeholder="Search for" class="btn btn-primary ms-3">Search<i class="fa-solid fa-cloud-sun-rain"></i></a>
     </form>
 
     <div class="card mt-4 mb-5">
       <div class="card-body">
-        <h1>Weather in <span data-open-weather-target="city" id="city"> <!-- TODO: CITY NAME --> </span></h1>
-        <h3 data-open-weather-target="date" id="date" class="text-secondary"><!-- TODO: DATE --></h3>
+        <h1>Weather in <span data-open-weather-target="city" id="city"></span></h1>
+        <h3 data-open-weather-target="date" id="date" class="text-secondary"></h3>
         <div data-open-weather-target="weather" id="weather">
-          <p data-open-weather-target="description" id="description"><!-- TODO: DESCRIPTION --></p>
+          <p data-open-weather-target="description" id="description"></p>
           <div class="d-flex">
             <img src="" alt="Weather Icon" data-open-weather-target="icon" id="icon">
-            <h2 data-open-weather-target="temperature" id="temperature"><!-- TODO: TEMPERATURE --></h2>
+            <h2 data-open-weather-target="temperature" id="temperature"></h2>
           </div>
         </div>
       </div>
