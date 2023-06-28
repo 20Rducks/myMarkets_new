@@ -57,9 +57,9 @@ export default class extends Controller {
       });
     };
 
-    const form = document.querySelector('form');
-    form.addEventListener('click', fetchWeatherByName);
-    currentLocation.addEventListener('click', fetchCurrentPositionWeather);
+    // const form = document.querySelector('form');
+    this.formTarget.addEventListener('click', fetchWeatherByName);
+    this.currentLocationTarget.addEventListener('click', fetchCurrentPositionWeather);
 
   }
 }
