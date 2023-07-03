@@ -25,7 +25,8 @@ export default class extends Controller {
         // Using data from api response to insert values into HTML card
         this.temperatureTarget.innerText = `${Math.round(data.main.temp)}°C`;
         this.iconTarget.src = `https://openweathermap.org/img/w/${data.weather[0].icon}.png`;
-        this.descriptionTarget.innerText = data.weather[0].description;
+        const caps = data.weather[0].description.charAt(0).toUpperCase() + data.weather[0].description.slice(1)
+        this.descriptionTarget.innerText = caps;
         this.cityTarget.innerText = data.name;
 
         // Using data to create todays date for HTML card

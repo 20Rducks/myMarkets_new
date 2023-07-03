@@ -7,7 +7,7 @@ class User < ApplicationRecord
   validates :email, uniqueness: true
   validates :email, presence: true
   # validates :username, uniqueness: true
-  # validates :username, presence: true
+  validates :username, presence: true
   has_many :trips, dependent: :destroy
   has_many :trip_invitations, dependent: :destroy, class_name: "TripBuddy", foreign_key: "user_id"
   has_many :reviews, dependent: :destroy
