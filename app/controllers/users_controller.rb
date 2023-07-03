@@ -6,12 +6,14 @@ class UsersController < ApplicationController
   def show
     start_date = params.fetch(:start_date, Date.today).to_date
     @trips = Trip.where(date: start_date.beginning_of_month.beginning_of_week..start_date.end_of_month.end_of_week)
-    @user = User.find(params[:id])
+    # @user = User.find(params[:id])
+    @user = current_user
   end
 
   def my_profile
     start_date = params.fetch(:start_date, Date.today).to_date
     @trips = Trip.where(date: start_date.beginning_of_month.beginning_of_week..start_date.end_of_month.end_of_week)
+    @trips = @trips.where(user_id: current_user.id)
     @user = current_user
     # @friendships = current_user.friendships
 

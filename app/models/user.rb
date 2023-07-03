@@ -4,6 +4,10 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
 
+  validates :email, uniqueness: true
+  validates :email, presence: true
+  # validates :username, uniqueness: true
+  # validates :username, presence: true
   has_many :trips, dependent: :destroy
   has_many :trip_invitations, dependent: :destroy, class_name: "TripBuddy", foreign_key: "user_id"
   has_many :reviews, dependent: :destroy
@@ -33,7 +37,6 @@ class User < ApplicationRecord
   def past_trips
     Trip.where(id: trips.where("date < ?", Date.today).pluck(:id) + Trip.where(id: accepted_invitations.pluck(:trip_id)).where("date < ?", Date.today).pluck(:id)).order(date: :desc)
   end
-
 end
 
 # sanitized params application controller DEVISE NOTES

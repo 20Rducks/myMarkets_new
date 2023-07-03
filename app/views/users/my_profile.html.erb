@@ -11,32 +11,44 @@
     </div>
   </div>
 </div>
-
-<%= render "shared/disable-button" %>
+<% if user_signed_in? %>
+ <div> Welcome <%= current_user.email %><%= current_user.username%> </div>
+  <%= button_to "Sign out", destroy_user_session_path, method: :delete %>
+<% else %>
+  <%= button_to "Sign in", new_user_session_path %>
+<% end %>
+<%# render "shared/disable-button" %>
 
 <div class="row justify-content-center">
   <div class="col-sm-8" data-controller="open-weather" data-open-weather-api-key-value="<% ENV['OPENWEATHER_API_KEY'] %>">
 
-    <form class="d-flex my-5">
-      <input type="text" placeholder="Enter city" data-open-weather-target="input" id="input" class="form-control flex-grow-1">
-      <a href="" data-open-weather-target="currentLocation" id="currentLocation" data-action="click->open-weather#weather" class="position btn btn-primary ms-3 align-center">Local <i class="fa-solid fa-cloud-sun-rain"></i></a>
-      <a type="submit" data-open-weather-target="form" data-action="click->open-weather#weather" data-action="click->open-weather#submit"  placeholder="Search for" class="btn btn-primary ms-3">Search<i class="fa-solid fa-cloud-sun-rain"></i></a>
-    </form>
-
     <div class="card mt-4 mb-5">
-      <div class="card-body">
-        <h1>Weather in <span data-open-weather-target="city" id="city"></span></h1>
-        <h3 data-open-weather-target="date" id="date" class="text-secondary"></h3>
-        <div data-open-weather-target="weather" id="weather">
-          <p data-open-weather-target="description" id="description"></p>
-          <div class="d-flex">
-            <img src="" alt="Weather Icon" data-open-weather-target="icon" id="icon">
-            <h2 data-open-weather-target="temperature" id="temperature"></h2>
+      <div class="card-body weather-card my-auto">
+
+        <div data-open-weather-target="blur" class="">
+          <h1 class="text-center d-none" data-open-weather-target="welcome">Weather in <span data-open-weather-target="city" id="city"></span></h1>
+
+          <div class="d-flex my-3">
+            <h3 data-open-weather-target="date" id="date" class="text-secondary"></h3>
+            <div data-open-weather-target="weather" id="weather"></div>
           </div>
+
+          <div class="d-flex justify-content-center my-3">
+            <p class="mr-5" data-open-weather-target="description" id="description"></p><br>
+            <h2 data-open-weather-target="temperature" id="temperature"></h2>
+            <img src="" class="d-none" alt="Weather Icon" data-open-weather-target="icon" id="icon">
+          </div>
+
         </div>
       </div>
     </div>
 
+    <%# Input Form with 2 buttons (1 City entry / 1 Local search) %>
+    <form class="d-flex my-5">
+      <input type="text" placeholder="Enter city" data-open-weather-target="input" id="input" class="form-control flex-grow-1">
+      <a href="" data-open-weather-target="currentLocation" id="currentLocation" data-action="click->open-weather#weather" class="position btn btn-primary ms-3 align-center"> Local <br><i class="fa-solid fa-cloud-sun-rain"></i></a>
+      <a type="submit" data-open-weather-target="form" data-action="click->open-weather#weather" data-action="click->open-weather#submit"  placeholder="Search for" class="btn btn-primary ms-3">Search<i class="fa-solid fa-cloud-sun-rain"></i></a>
+    </form>
   </div>
 </div>
 
@@ -65,16 +77,17 @@
 <div class="profile-calendar m-5">
   <%= month_calendar(events: @trips, start_time: :date) do |date, trips| %>
   <%= date %>
-    <% trips.each do |trip| %>
-      <div class="trip">
-        <p><b><%= trip.market.name %></b></p>
-        <% trip.users.each do |buddy| %>
-          <p>With <%= buddy.username %></p>
-        <% end %>
-        <p><em><%= trip.message.capitalize %></em></p>
-
-      </div>
-    <% end %>
+      <% trips.each do |trip| %>
+    <%# if trip = @current_user.trips %>
+        <div class="trip">
+          <p><b><%= trip.market.name %></b></p>
+          <% trip.users.each do |buddy| %>
+            <p>With <%= buddy.username %></p>
+          <% end %>
+          <p><em><%= trip.message.capitalize %></em></p>
+        </div>
+      <% end %>
+    <%# end %>
   <% end %>
 </div>
 

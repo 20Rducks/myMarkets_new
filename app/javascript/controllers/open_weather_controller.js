@@ -7,7 +7,8 @@ export default class extends Controller {
   }
 
   static targets = ["icon", "temperature", "description", "city",
-                    "date", "input", "currentLocation", "form"]
+                    "date", "input", "currentLocation", "form",
+                    "welcome", "blur"]
 
   connect() {
     // console.log("helloo")
@@ -16,7 +17,9 @@ export default class extends Controller {
   weather(event) {
     event.preventDefault();
     const key = "51584be985ba7d5712771046299b7195"
-    console.log(this.inputTarget.value)
+    console.log(this.inputTarget.value);
+    console.log(this.welcomeTarget.value);
+
     // Function to update card info
     const updateCard = (data) => {
         // Using data from api response to insert values into HTML card
@@ -32,6 +35,10 @@ export default class extends Controller {
         const options = { weekday: 'long', month: 'long', day: 'numeric', hour: 'numeric', minute: 'numeric' };
         const formattedDate = localDate.toLocaleDateString("en-US", options);
         date.innerText = formattedDate;
+
+        this.iconTarget.classList.remove("d-none")
+        this.welcomeTarget.classList.remove("d-none")
+        this.blurTarget.classList.add("weather-info")
     };
 
     const fetchWeatherByName = (event) => {
@@ -57,9 +64,7 @@ export default class extends Controller {
       });
     };
 
-    // const form = document.querySelector('form');
     this.formTarget.addEventListener('click', fetchWeatherByName);
     this.currentLocationTarget.addEventListener('click', fetchCurrentPositionWeather);
-
   }
 }
