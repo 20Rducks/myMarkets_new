@@ -3,7 +3,7 @@
   <div class="row">
     <div class="head-banner-market mt-3 d-flex justify-content-between align-items-center text-center">
       <div class="my-auto text-center">
-        <h1 class="ml-5 text-white"> Welcome back, <%= current_user.username %> !</h1>
+        <h2 class="ml-5 text-white"> Welcome back</h2> <h1 class="ml-5 text-white"> <%= current_user.username %></h1>
       </div>
       <div>
          <%= image_tag "logo-fred.png" , class: 'profile my-auto' %>
@@ -11,32 +11,37 @@
     </div>
   </div>
 </div>
-<% if user_signed_in? %>
- <div> Welcome <%= current_user.email %><%= current_user.username%> </div>
-  <%= button_to "Sign out", destroy_user_session_path, method: :delete %>
-<% else %>
-  <%= button_to "Sign in", new_user_session_path %>
-<% end %>
+
+<%# Sign in and out of sessions %>
+
+<%# if user_signed_in? %>
+ <%# <div> Welcome <%= current_user.email %>
+  <%# button_to "Sign out", destroy_user_session_path, method: :delete %>
+<%# else %>
+  <%# button_to "Sign in", new_user_session_path %>
+<%# end %>
+
+
 <%# render "shared/disable-button" %>
 
 <div class="row justify-content-center">
   <div class="col-sm-8" data-controller="open-weather" data-open-weather-api-key-value="<% ENV['OPENWEATHER_API_KEY'] %>">
 
-    <div class="card mt-4 mb-5">
+    <div class="card mt-4 mb-3">
       <div class="card-body weather-card my-auto">
 
         <div data-open-weather-target="blur" class="">
           <h1 class="text-center d-none" data-open-weather-target="welcome">Weather in <span data-open-weather-target="city" id="city"></span></h1>
 
-          <div class="d-flex my-3">
-            <h3 data-open-weather-target="date" id="date" class="text-secondary"></h3>
+          <div class="d-flex my-2">
+            <h3 data-open-weather-target="date" id="date" class="text-white"></h3>
             <div data-open-weather-target="weather" id="weather"></div>
           </div>
 
-          <div class="d-flex justify-content-center my-3">
-            <p class="mr-5" data-open-weather-target="description" id="description"></p><br>
-            <h2 data-open-weather-target="temperature" id="temperature"></h2>
+          <div class="d-flex justify-content-center my-2">
             <img src="" class="d-none" alt="Weather Icon" data-open-weather-target="icon" id="icon">
+            <p class="mr-5 text-white" data-open-weather-target="description" id="description"></p><br>
+            <h2 class="text-white" data-open-weather-target="temperature" id="temperature"></h2>
           </div>
 
         </div>
